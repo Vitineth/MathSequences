@@ -6,8 +6,6 @@ import net.objecthunter.exp4j.ExpressionBuilder;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.IntSummaryStatistics;
 import java.util.List;
 
 /**
@@ -263,7 +261,17 @@ public class Sequences {
         return results;
     }
 
-    public static long[] generateSquareNumbers(int amount){
+
+    /**
+     * This will generate the given amount of numbers in the Square Number Sequence
+     * <br>
+     * <br>
+     * OEIS Index: <a href="http://oeis.org/A000290">http://oeis.org/A000290</a>
+     *
+     * @param amount The amount of numbers to generate
+     * @return long[] - The array of numbers
+     */
+    public static long[] generateSquareNumbers(int amount) {//
         long[] results = new long[amount];
         for (int i = 0; i < amount; i++) {
             results[i] = (long) Math.pow(i, 2);
@@ -271,7 +279,17 @@ public class Sequences {
         return results;
     }
 
-    public static long[] generateCubeNumbers(int amount){
+
+    /**
+     * This will generate the given amount of numbers in the Cube Number Sequence
+     * <br>
+     * <br>
+     * OEIS Index: <a href="http://oeis.org/A000578">http://oeis.org/A000578</a>
+     *
+     * @param amount The amount of numbers to generate
+     * @return long[] - The array of numbers
+     */
+    public static long[] generateCubeNumbers(int amount) {//
         long[] results = new long[amount];
         for (int i = 0; i < amount; i++) {
             results[i] = (long) Math.pow(i, 3);
@@ -279,6 +297,13 @@ public class Sequences {
         return results;
     }
 
+    /**
+     * This will generate the given amount of numbers to the power of 'x'
+     *
+     * @param amount The amount of numbers
+     * @param x      The number to raise i to.
+     * @return long[] - The values
+     */
     public static long[] generateNPowX(int amount, int x){
         long[] results = new long[amount];
         for (int i = 0; i < amount; i++) {
@@ -287,7 +312,16 @@ public class Sequences {
         return results;
     }
 
-    public static long[] generateSigma1N(int amount){
+    /**
+     * This will generate the given amount of numbers in the sigma_1(n) Sequence
+     * <br>
+     * <br>
+     * OEIS Index: <a href="http://oeis.org/A000203">http://oeis.org/A000203</a>
+     *
+     * @param amount The amount of numbers to generate
+     * @return long[] - The array of numbers
+     */
+    public static long[] generateSigma1N(int amount){//
         long[] results = new long[amount];
         for (int i = 0; i < amount; i++) {
             List<Integer> divisors = new ArrayList<Integer>();
@@ -304,7 +338,16 @@ public class Sequences {
         return results;
     }
 
-    public static long[] generateSigma0N(int amount){
+    /**
+     * This will generate the given amount of numbers in the sigma_0(n) Sequence
+     * <br>
+     * <br>
+     * OEIS Index: <a href="http://oeis.org/A000005">http://oeis.org/A000005</a>
+     *
+     * @param amount The amount of numbers to generate
+     * @return long[] - The array of numbers
+     */
+    public static long[] generateSigma0N(int amount){//
         long[] results = new long[amount];
         for (int i = 0; i < amount; i++) {
             List<Integer> divisors = new ArrayList<Integer>();
@@ -316,6 +359,15 @@ public class Sequences {
         return results;
     }
 
+    /**
+     * This will generate the given amount of numbers in the Euler Totient Sequence
+     * <br>
+     * <br>
+     * OEIS Index: <a href="http://oeis.org/A000010">http://oeis.org/A000010</a>
+     *
+     * @param amount The amount of numbers to generate
+     * @return long[] - The array of numbers
+     */
     public static long[] generateEulerTotientNumbers(int amount){
         long[] results = new long[amount];
         for (int i = 0; i < amount; i++) {//For the given amount of numbers
@@ -338,12 +390,18 @@ public class Sequences {
         return results;
     }
 
-    public static long[] generatePrimesUpToN(int amount){
+    /**
+     * This will generate primes up to the value of n
+     *
+     * @param n The value primes should go up to
+     * @return long[] - The primes
+     */
+    public static long[] generatePrimesUpToN(int n){
         long potentialPrime = 2;
         boolean add;
         List<Long> primeSet = new ArrayList<Long>();
         primeSet.add(potentialPrime);
-        while(potentialPrime < amount){
+        while (potentialPrime < n){
             potentialPrime++;
             add = true;
             for (Long aPrimeSet : primeSet) {
@@ -363,6 +421,11 @@ public class Sequences {
         return results;
     }
 
+    /**
+     * This will generate 'amount' of primes
+     * @param amount The amount of primes it should generate
+     * @return long[] - The primes
+     */
     public static long[] generateNPrimes(int amount){
         long[] results = new long[amount];
         long potentialPrime = 2;
