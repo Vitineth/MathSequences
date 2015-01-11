@@ -214,7 +214,7 @@ public class Sequences {
         for (int i = 0; i < amount; i++) {
             try {
                 double first = (double) 1 / (i + 1);
-                BigInteger second = binomialCoefficient(2 * i, i);
+                BigInteger second = MathUtils.solveBinomialCoefficients(2 * i, i);
                 results[i] = (long) (first * second.doubleValue());
             } catch (BinomialCoefficientParameterException e) {
                 e.printStackTrace();
@@ -230,16 +230,16 @@ public class Sequences {
      * OEIS Index: <a href="http://oeis.org/A005150">http://oeis.org/A005150</a>
      *
      * @param amount The amount of numbers to generate
-     * @return long[] - The array of numbers
+     * @return BigInteger[] - The array of numbers
      */
-    public static long[] generateLookAndSayNumbers(int amount){
-        long[] results = new long[amount];
+    public static BigInteger[] generateLookAndSayNumbers(int amount) {
+        BigInteger[] results = new BigInteger[amount];
         String currentNumber = "1";
         String newNumber = "";
         char current;
         int count;
         for (int i = 0; i < amount; i++) {
-            results[i] = Long.parseLong(currentNumber);
+            results[i] = new BigInteger(currentNumber);
             current = currentNumber.charAt(0);
             count = 0;
             for (int j = 0; j < currentNumber.length(); j++) {
@@ -318,17 +318,22 @@ public class Sequences {
 
     public static long[] generateEulerTotientNumbers(int amount){
         long[] results = new long[amount];
-        for (int i = 0; i < amount; i++) {
-            long[] timesToN = generatePrimesUpToN(i);
-            List<Long> finals = new ArrayList<Long>();
-            finals.add((long) 1);
-            for(long prime : timesToN) {
-                if(i % prime != 0 && prime <= i){
-                    finals.add(prime);
+        for (int i = 0; i < amount; i++) {//For the given amount of numbers
+            List<Integer> iFactors = MathUtils.generateFactorsOfN(i);//Get their factors
+            int count = 0;//And create a variable called count at 0
+            for (int j = 0; j < i; j++) {//While the value of j is less than the value of i
+                List<Integer> jFactors = MathUtils.generateFactorsOfN(j);//Get j's factors
+                boolean coprime = true;//Create a variable called coprime and set it to true as a default
+                if (jFactors.size() == 0) coprime = false;//If j has no factors it cannot be coprime
+                for (Integer integer : jFactors) {//For every factor of j
+                    if (integer != 1 && iFactors.contains(integer)) {//If it is not 1 and is also a factor of i
+                        coprime = false;//Then set coprime to false
+                        break;//And break
+                    }
                 }
+                if (coprime) count++;//If the number was coprime then add 1 to count
             }
-            System.out.println(i + ": " + Arrays.toString(finals.toArray()));
-            results[i] = finals.size();
+            results[i] = count;
         }
         return results;
     }
@@ -406,43 +411,6 @@ public class Sequences {
 
         }
         return results;
-    }
-
-    /**
-     * Calculates r!<br><br>
-     *
-     * r! = 1x2x...r
-     *
-     * @param r The value to calculate
-     * @return BigInteger - The result of r!
-     */
-    public static BigInteger rEM(int r){
-        BigInteger current = new BigInteger("1");
-        for (int i = 1; i < r + 1; i++) {
-            current = current.multiply(new BigInteger(i + ""));
-        }
-        return current;
-    }
-
-    /**
-     * This will calculate the given binomialCoefficient in the form of: <br>
-     *     <img src="http://mathforum.org/mathimages/imgUpload/math/7/2/2/72247a620629325bc76d310464f78286.png">
-     * @param n
-     * @param k
-     * @return
-     * @throws BinomialCoefficientParameterException
-     */
-    public static BigInteger binomialCoefficient(int n, int k) throws BinomialCoefficientParameterException{
-        // a > b > 0
-        if(!(n > k) && !(k >= 0)){
-            throw new BinomialCoefficientParameterException();
-        }
-        BigInteger top = rEM(n);
-        BigInteger base1 = rEM(k);
-        BigInteger base2 = rEM(n - k);
-        BigInteger base = base1.multiply(base2);
-
-        return top.divide(base);
     }
 
 }
