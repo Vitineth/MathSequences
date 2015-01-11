@@ -29,6 +29,7 @@ public class SequencesTest {
         long[] cubes = Sequences.generateCubeNumbers(10);
         long[] nPow4 = Sequences.generateNPowX(10, 4);
         long[] nPow10 = Sequences.generateNPowX(10, 10);
+        double[] linearEquation = Sequences.executeLinearEquation("4x + 3", 10);
 
         System.out.println("Catalan: " + Arrays.toString(catalan));
         System.out.println("Fibonacci: " + Arrays.toString(fibonacci));
@@ -48,6 +49,7 @@ public class SequencesTest {
         System.out.println("Cubes: " + Arrays.toString(cubes));
         System.out.println("nPow4: " + Arrays.toString(nPow4));
         System.out.println("nPow10: " + Arrays.toString(nPow10));
+        System.out.println("Linear: " + Arrays.toString(linearEquation));
     }
 
 }
