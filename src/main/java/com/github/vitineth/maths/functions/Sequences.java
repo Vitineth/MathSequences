@@ -392,6 +392,9 @@ public class Sequences {
 
     /**
      * This will generate primes up to the value of n
+     * <br>
+     * <br>
+     * OEIS Index: <a href="http://oeis.org/A000040">http://oeis.org/A000040</a>
      *
      * @param n The value primes should go up to
      * @return long[] - The primes
@@ -423,6 +426,10 @@ public class Sequences {
 
     /**
      * This will generate 'amount' of primes
+     * <br>
+     * <br>
+     * OEIS Index: <a href="http://oeis.org/A000040">http://oeis.org/A000040</a>
+     * 
      * @param amount The amount of primes it should generate
      * @return long[] - The primes
      */
@@ -450,24 +457,16 @@ public class Sequences {
 
         return results;
     }
-
+    
     /**
-     * pp = 2
-     ps = [pp]
-     lim = raw_input("\nGenerate prime numbers up to what number? : ")
-     while pp < int(lim):
-     pp += 1
-     for a in ps:
-     if pp%a==0:
-     break
-     else:
-     if pp not in ps:
-     ps.append(pp)
-     print ps
-     * @param amount
-     * @return
+     * This is the base template for new OEIS sequences.
+     * <br>
+     * <br>
+     * OEIS Index: <a href="http://oeis.org/Axxxxxx">http://oeis.org/Axxxxxx</a>
+     * 
+     * @param amount int - The amount of values to generate.
+     * @return long[] - The array of values in the sequence
      */
-
     public static long[] base(int amount){
         long[] results = new long[amount];
         for (int i = 0; i < amount; i++) {
